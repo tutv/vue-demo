@@ -6,7 +6,7 @@
 
         <hr>
 
-        <p>Your Funds: {{funds}}</p>
+        <p>Your Funds: {{funds | currency}}</p>
     </div>
 </template>
 
