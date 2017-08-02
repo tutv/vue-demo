@@ -15,4 +15,8 @@ export default [
         path: '/stocks',
         component: Stocks
     },
+    {
+        path: '*',
+        redirect: '/'
+    }
 ]
