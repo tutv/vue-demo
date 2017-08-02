@@ -29,7 +29,7 @@
                            aria-expanded="false">Save & load <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" @click.prevent="saveData">Save data</a></li>
-                            <li><a href="#">Load data</a></li>
+                            <li><a href="#" @click.prevent="loadData">Load data</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -54,9 +54,10 @@
             }
         },
         methods: {
-            ...mapActions([
-                'randomizeStocks'
-            ]),
+            ...mapActions({
+                randomizeStocks: 'randomizeStocks',
+                fetchData: 'loadData'
+            }),
             endDay() {
                 this.randomizeStocks();
             },
@@ -68,6 +69,9 @@
                 };
 
                 this.$http.put('data.json', data);
+            },
+            loadData() {
+                this.fetchData();
             }
         }
     }
