@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+# Technologies
+
+Vue + Vuex + Vue Router + Vue Resource + Firebase
+
 ## Build Setup
 
 ``` bash
