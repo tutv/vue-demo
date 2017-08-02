@@ -19,7 +19,7 @@
         components: {AppHeader},
         name: 'app',
         created() {
-            this.$store.dispatch('initStocks');
+            this.$store.dispatch('loadData');
         }
     }
 </script>
