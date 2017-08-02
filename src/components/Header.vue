@@ -19,6 +19,7 @@
                     <router-link to="/portfolio" activeClass="active" tag="li"><a>Portfolio</a></router-link>
                     <router-link to="/stocks" activeClass="active" tag="li"><a>Stocks</a></router-link>
                 </ul>
+                <strong class="nav navbar-text navbar-right">Funds: {{funds}}</strong>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">End day</a></li>
                     <li class="dropdown">
@@ -37,6 +38,11 @@
 
 <script>
     export default {
-        name: 'app-header'
+        name: 'app-header',
+        computed: {
+            funds() {
+                return this.$store.getters.funds;
+            }
+        }
     }
 </script>
