@@ -9,7 +9,7 @@
             </div>
 
             <div class="panel-body">
-                <div class="pull-left">
+                <div class="pull-left" :class="{'has-error': insufficientFunds}">
                     <input class="form-control"
                            v-model.number="quantity"
                            type="number"
@@ -18,9 +18,9 @@
 
                 <div class="pull-right">
                     <button class="btn btn-success"
-                            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+                            :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)"
                             @click.prevent="buyStock">
-                        Buy
+                        {{insufficientFunds ? 'Insufficient' : 'Buy' }}
                     </button>
                 </div>
             </div>
@@ -48,6 +48,14 @@
             return {
                 quantity: 0
             };
+        },
+        computed: {
+            funds() {
+                return this.$store.getters.funds;
+            },
+            insufficientFunds() {
+                return this.quantity * this.stock.price > this.funds;
+            }
         }
     }
 </script>

@@ -9,7 +9,7 @@
             </div>
 
             <div class="panel-body">
-                <div class="pull-left">
+                <div class="pull-left" :class="{'has-error': insufficientQuantity}">
                     <input class="form-control"
                            v-model.number="quantity"
                            type="number"
@@ -18,9 +18,9 @@
 
                 <div class="pull-right">
                     <button class="btn btn-success"
-                            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+                            :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)"
                             @click.prevent="sellStock">
-                        Sell
+                        {{insufficientQuantity ? 'Not enough' : 'Sell'}}
                     </button>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         props: ['stock'],
         methods: {
             ...mapActions({
-               'placeSellOrder': 'sellStock'
+                'placeSellOrder': 'sellStock'
             }),
             sellStock() {
                 const order = {
@@ -53,6 +53,11 @@
             return {
                 quantity: 0
             };
+        },
+        computed: {
+            insufficientQuantity() {
+                return this.quantity > this.stock.quantity
+            }
         }
     }
 </script>
